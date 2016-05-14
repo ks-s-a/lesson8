@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <head>
-    <title>Socket.IO chat</title>
+    <title>Feya chat</title>
     <style>
       * { margin: 0; padding: 0; box-sizing: border-box; }
       body { font: 13px Helvetica, Arial; }
@@ -25,22 +25,25 @@
       // Соединяемся с сервером
       var client = new Faye.Client('http://localhost:8000/f');
       
+      // Обработчик входящих сообщений
+      client.subscribe('/messages', function(message) {
+        $('#messages').append($('<li>').text(message.text));
+      });
+
       $('form').submit(function(e) {
         e.preventDefault(); // Отменяем действие по-умолчанию
 
+        var typedMessage = $('#m').val();
+        if (!typedMessage) // Если у нас пустое сообщение
+          return;
+
+        // Отправляем сообщение на сервер
         client.publish('/messages', {
-          text: $('#m').val()
+          text: typedMessage,
         });
 
         $('#m').val('');
       });
-
-      // Обработчик входящих сообщений
-
-    client.subscribe('/messages', function(message) {
-      $('#messages').append($('<li>').text(message.text));
-    });
-
     </script>
 
   </body>

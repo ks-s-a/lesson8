@@ -24,21 +24,24 @@
     <script>
       // Соединяемся с сервером
       var socket = io();
-      
-      $('form').submit(function(e) {
-        e.preventDefault(); // Отменяем действие по-умолчанию
-
-        // Передаем серверу сообщение с данными
-        socket.emit('message', $('#m').val());
-
-        // Очищаем форму
-        $('#m').val('');
-
-      });
 
       // Обработчик входящих сообщений
       socket.on('message', function(msg){
         $('#messages').append($('<li>').text(msg));
+      });
+      
+      $('form').submit(function(e) {
+        e.preventDefault(); // Отменяем действие по-умолчанию
+
+        var typedMessage = $('#m').val();
+        if (!typedMessage) // Если у нас пустое сообщение
+          return;
+        
+        // Передаем серверу сообщение с данными
+        socket.emit('message', typedMessage);
+
+        // Очищаем форму
+        $('#m').val('');
       });
     </script>
 
