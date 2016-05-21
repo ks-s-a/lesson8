@@ -1,4 +1,4 @@
-// Пример использования Websockets
+// Пример использования Web Sockets
 var express = require('express');
 var app = express();
 var server = require('http').Server(app);
@@ -9,15 +9,16 @@ app.use('/', express.static(__dirname + '/static'));
 
 // Обработка сообщений Websockets
 io.sockets.on('connection', function (socket) {
-  console.log(socket); // Посмотрим объект
+  console.log('connected: ', socket); // Посмотрим объект
 
   // Событие закрытия соединения
   socket.on('disconnect', function () {
     console.log('user disconnected');
-  })
+  });
 
   // Событие прихода соощения от клиента
   socket.on('message', function (message) {
+    // Показываем сообщение
     console.log('message is: ', message);
 
     // Только текущего клиента
