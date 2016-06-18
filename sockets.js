@@ -9,7 +9,8 @@ app.use('/', express.static(__dirname + '/static'));
 
 // Обработка сообщений Websockets
 io.sockets.on('connection', function (socket) {
-  console.log('connected: ', socket); // Посмотрим объект
+  // Посмотрим объект
+  console.log('connected: ', socket);
 
   // Событие закрытия соединения
   socket.on('disconnect', function () {

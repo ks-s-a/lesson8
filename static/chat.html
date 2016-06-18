@@ -18,7 +18,8 @@
   <body>
     <ul id="messages"></ul>
     <form action="">
-      <input id="m" autocomplete="off" /><button>Send</button>
+      <input id="m" autocomplete="off" />
+      <button>Send</button>
     </form>
 
     <script>
@@ -31,10 +32,13 @@
       });
       
       $('form').submit(function(e) {
-        e.preventDefault(); // Отменяем действие по-умолчанию
+        // Отменяем действие по-умолчанию
+        e.preventDefault();
 
         var typedMessage = $('#m').val();
-        if (!typedMessage) // Если у нас пустое сообщение
+        
+        // Если у нас пустое сообщение
+        if (!typedMessage)
           return;
         
         // Передаем серверу сообщение с данными
