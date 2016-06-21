@@ -8,7 +8,7 @@ var io = require('socket.io')(server);
 app.use('/', express.static(__dirname + '/static'));
 
 // Обработка сообщений Websockets
-io.sockets.on('connection', function (socket) {
+io.on('connection', function (socket) {
   // Посмотрим объект
   console.log('connected: ', socket);
 
